@@ -2,55 +2,44 @@ package kr.co.tjeit.servertest;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
+import android.widget.ListView;
 
-import org.json.JSONObject;
+public class MainActivity extends BaseActivity {
 
-import kr.co.tjeit.servertest.utils.ServerUtil;
-
-public class MainActivity extends AppCompatActivity {
-
-    private android.widget.Button serverBtn;
-    private Button signupBtn;
-    private android.widget.EditText idEdt;
-    private android.widget.EditText pwEdt;
+    private android.widget.Button makePostBtn;
+    private android.widget.ListView postListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        this.pwEdt = (EditText) findViewById(R.id.pwEdt);
-        this.idEdt = (EditText) findViewById(R.id.idEdt);
-        this.signupBtn = (Button) findViewById(R.id.signupBtn);
-        this.serverBtn = (Button) findViewById(R.id.serverBtn);
+        bindViews();
+        setupEvents();
+        setValues();
+    }
 
-        signupBtn.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void setupEvents() {
+        makePostBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, SignupActivity.class);
+                Intent intent = new Intent(mContext, MakePostActivity.class);
                 startActivity(intent);
             }
         });
+    }
 
-        serverBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+    @Override
+    public void setValues() {
 
-                ServerUtil.sign_in(MainActivity.this,
-                        idEdt.getText().toString(),
-                        pwEdt.getText().toString(),
-                        new ServerUtil.JsonResponseHandler() {
-                            @Override
-                            public void onResponse(JSONObject json) {
+    }
 
-                            }
-                        });
-            }
-        });
+    @Override
+    public void bindViews() {
 
-
+        this.postListView = (ListView) findViewById(R.id.postListView);
+        this.makePostBtn = (Button) findViewById(R.id.makePostBtn);
     }
 }
