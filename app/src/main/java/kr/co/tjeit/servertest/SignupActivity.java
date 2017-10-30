@@ -41,7 +41,6 @@ public class SignupActivity extends AppCompatActivity {
                         idEdt.getText().toString(),
                         pwEdt.getText().toString(),
                         nameEdt.getText().toString(),
-                        genderValue,
                         new ServerUtil.JsonResponseHandler() {
                             @Override
                             public void onResponse(JSONObject json) {

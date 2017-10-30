@@ -31,17 +31,17 @@ public class MakePostActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
 
-                ServerUtil.register_post(mContext,
-                        1,
-                        contentEdt.getText().toString(),
-                        new ServerUtil.JsonResponseHandler() {
-                            @Override
-                            public void onResponse(JSONObject json) {
-                                Toast.makeText(mContext, "게시글 등록됨.", Toast.LENGTH_SHORT).show();
-
-                                finish();
-                            }
-                        });
+//                ServerUtil.register_post(mContext,
+//                        1,
+//                        contentEdt.getText().toString(),
+//                        new ServerUtil.JsonResponseHandler() {
+//                            @Override
+//                            public void onResponse(JSONObject json) {
+//                                Toast.makeText(mContext, "게시글 등록됨.", Toast.LENGTH_SHORT).show();
+//
+//                                finish();
+//                            }
+//                        });
 
 
             }
