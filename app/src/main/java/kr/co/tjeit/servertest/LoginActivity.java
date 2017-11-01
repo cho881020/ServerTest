@@ -11,6 +11,8 @@ import android.widget.Toast;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import kr.co.tjeit.servertest.data.Student;
+import kr.co.tjeit.servertest.utils.ContextUtil;
 import kr.co.tjeit.servertest.utils.ServerUtil;
 
 public class LoginActivity extends BaseActivity {
@@ -49,6 +51,8 @@ public class LoginActivity extends BaseActivity {
                             public void onResponse(JSONObject json) {
                                 try {
                                     if (json.getBoolean("result")) {
+
+                                        ContextUtil.loginStudent = Student.getStudentFromJSON(json.getJSONObject("student"));
 
                                         Intent intent = new Intent(mContext, MainActivity.class);
                                         startActivity(intent);

@@ -6,7 +6,10 @@ import android.util.Log;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 
@@ -62,6 +65,53 @@ public class ServerUtil {
 
         });
     }
+
+
+    public static void register_absent(final Context context,
+                                     final String reasonStr,
+                                     final JsonResponseHandler handler) {
+        String url = BASE_URL+"lm/register_absent";
+        //		String registrationId = ContextUtil.getRegistrationId(context);
+
+        Map<String, String> data = new HashMap<String, String>();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.KOREA);
+        data.put("date", sdf.format(Calendar.getInstance().getTime()));
+        data.put("reason", reasonStr);
+//        로그인한 사용자 정보를 저장해놓고 불러와야함. => ContextUtil 활용
+        data.put("student_id", ContextUtil.loginStudent.getId()+"");
+
+        AsyncHttpRequest.post(context, url,  data, false, new AsyncHttpRequest.HttpResponseHandler() {
+
+            @Override
+            public boolean onPrepare() {
+                return true;
+            }
+
+            @Override
+            public void onResponse(String response) {
+                Log.i("RESPONSE", response);
+                try {
+                    JSONObject json = new JSONObject(response);
+
+                    if (handler != null)
+                        handler.onResponse(json);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+            @Override
+            public void onFinish() {
+
+            }
+
+            @Override
+            public void onCancelled() {
+
+            }
+
+        });
+    }
+
 
 
 
