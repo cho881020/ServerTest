@@ -25,7 +25,7 @@ public class ServerUtil {
 
 
     public static void test(final Context context,
-                               final JsonResponseHandler handler) {
+                            final JsonResponseHandler handler) {
         String url = BASE_URL+"mobile/hello_json";
         //		String registrationId = ContextUtil.getRegistrationId(context);
 
@@ -62,6 +62,100 @@ public class ServerUtil {
 
         });
     }
+
+
+
+    public static void register_user(final Context context,
+                                     final String stdId,
+                                     final String stdPw,
+                                     final String stdName,
+                                     final String stdPhone,
+                            final JsonResponseHandler handler) {
+        String url = BASE_URL+"lm/register_user";
+        //		String registrationId = ContextUtil.getRegistrationId(context);
+
+        Map<String, String> data = new HashMap<String, String>();
+        data.put("studentId", stdId);
+        data.put("studentPw", stdPw);
+        data.put("studentName", stdName);
+        data.put("studentPhone", stdPhone);
+
+        AsyncHttpRequest.post(context, url,  data, false, new AsyncHttpRequest.HttpResponseHandler() {
+
+            @Override
+            public boolean onPrepare() {
+                return true;
+            }
+
+            @Override
+            public void onResponse(String response) {
+                Log.i("RESPONSE", response);
+                try {
+                    JSONObject json = new JSONObject(response);
+
+                    if (handler != null)
+                        handler.onResponse(json);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+            @Override
+            public void onFinish() {
+
+            }
+
+            @Override
+            public void onCancelled() {
+
+            }
+
+        });
+    }
+
+    public static void login(final Context context,
+                                     final String stdId,
+                                     final String stdPw,
+                                     final JsonResponseHandler handler) {
+        String url = BASE_URL+"lm/login";
+        //		String registrationId = ContextUtil.getRegistrationId(context);
+
+        Map<String, String> data = new HashMap<String, String>();
+        data.put("studentId", stdId);
+        data.put("studentPw", stdPw);
+
+        AsyncHttpRequest.post(context, url,  data, false, new AsyncHttpRequest.HttpResponseHandler() {
+
+            @Override
+            public boolean onPrepare() {
+                return true;
+            }
+
+            @Override
+            public void onResponse(String response) {
+                Log.i("RESPONSE", response);
+                try {
+                    JSONObject json = new JSONObject(response);
+
+                    if (handler != null)
+                        handler.onResponse(json);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+            @Override
+            public void onFinish() {
+
+            }
+
+            @Override
+            public void onCancelled() {
+
+            }
+
+        });
+    }
+
+
 
 
     public static void sign_up(final Context context,

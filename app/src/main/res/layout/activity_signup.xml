@@ -9,9 +9,9 @@
 
     <EditText
         android:id="@+id/idEdt"
-        android:hint="아이디 입력"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:hint="아이디 입력" />
 
     <EditText
         android:id="@+id/pwEdt"
@@ -25,7 +25,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
+    <EditText
+        android:id="@+id/phoneEdt"
+        android:hint="핸드폰 번호 입력"
+        android:inputType="phone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
     <RadioGroup
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">

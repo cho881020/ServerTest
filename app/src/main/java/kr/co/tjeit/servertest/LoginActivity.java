@@ -13,7 +13,7 @@ import org.json.JSONObject;
 
 import kr.co.tjeit.servertest.utils.ServerUtil;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends BaseActivity {
 
     private android.widget.Button serverBtn;
     private Button signupBtn;
@@ -41,21 +41,21 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                ServerUtil.sign_in(LoginActivity.this,
+                ServerUtil.login(mContext,
                         idEdt.getText().toString(),
                         pwEdt.getText().toString(),
                         new ServerUtil.JsonResponseHandler() {
                             @Override
                             public void onResponse(JSONObject json) {
-
                                 try {
                                     if (json.getBoolean("result")) {
-                                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+
+                                        Intent intent = new Intent(mContext, MainActivity.class);
                                         startActivity(intent);
                                         finish();
                                     }
                                     else {
-                                        Toast.makeText(LoginActivity.this, "로그인에 실패했습니다.", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(mContext, "로그인에 실패했습니다.", Toast.LENGTH_SHORT).show();
                                     }
                                 } catch (JSONException e) {
                                     e.printStackTrace();
@@ -63,9 +63,26 @@ public class LoginActivity extends AppCompatActivity {
 
                             }
                         });
+
+
             }
         });
 
+
+    }
+
+    @Override
+    public void setupEvents() {
+
+    }
+
+    @Override
+    public void setValues() {
+
+    }
+
+    @Override
+    public void bindViews() {
 
     }
 }
